@@ -154,7 +154,7 @@ const COLORS=[{n:'Preto',h:'#1b1d22',bg:'#e9ecf1'},{n:'Branco',h:'#f3f4f6',bg:'#
 const S={view:'product',color:0,qty:1,view3:'front',cart:[],cep:'',cepOk:false,addr:{},pay:'pix',bump:false,order:null};
 const R=v=>'R$ '+v.toFixed(2).replace('.',',');
 const $=id=>document.getElementById(id);
-const PH={0:'913c66b8e7c1f30255dd0caae10a8191.jpg',1:'jbl-branca.jpg'};
+const PH={0:'913c66b8e7c1f30255dd0caae10a8191.jpg',1:'1791153835528.jpg'};
 function spk(c,v){const sv=spk0(c,v),f=PH[c];if(!f||v!=='front')return sv;return `<span style="position:relative;display:grid;place-items:center;width:100%;aspect-ratio:1/1">${sv}<img src="${f}" alt="Caixa de som JBL ${COLORS[c].n}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;border-radius:inherit" onload="this.previousElementSibling.style.visibility='hidden'" onerror="this.remove()"></span>`}
 function spk0(c,v){const h=COLORS[c].h,tx=c===1?'#16181d':'#fff';
  const grille=Array.from({length:7},(_,i)=>`<rect x="${70+i*8}" y="92" width="3" height="76" rx="1.5" fill="#000" opacity=".28"/>`).join('')+Array.from({length:7},(_,i)=>`<rect x="${300+i*8}" y="92" width="3" height="76" rx="1.5" fill="#000" opacity=".28"/>`).join('');
@@ -246,7 +246,7 @@ function toPay(){const a=S.addr,miss=[];
  if(miss.length){miss.forEach(k=>{const e=$(k==='cep'?'cepin':k);e&&e.classList.add('bad')});$('err').textContent='Confira os campos em vermelho. '+(miss.includes('cpf')?'O CPF precisa ser válido.':'');return}
  go('payment')}
 document.addEventListener('input',e=>{if(e.target.id==='cpf'){e.target.value=mask(e.target.value,'cpf');S.addr.cpf=e.target.value}if(e.target.id==='tel'){e.target.value=mask(e.target.value,'tel');S.addr.tel=e.target.value}});
-function bottle(){return `<span style="position:relative;display:grid;place-items:center;width:100%;aspect-ratio:1/1">${bottle0()}<img src="garrafa-stanley.jpg" alt="Garrafa Stanley" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain" onload="this.previousElementSibling.style.visibility='hidden'" onerror="this.remove()"></span>`}
+function bottle(){return `<span style="position:relative;display:grid;place-items:center;width:100%;aspect-ratio:1/1">${bottle0()}<img src="6897bfff1a833c9d158978b4bdf17871.jpg" alt="Garrafa Stanley" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain" onload="this.previousElementSibling.style.visibility='hidden'" onerror="this.remove()"></span>`}
 function bottle0(){return `<svg viewBox="0 0 120 150" role="img" aria-label="Garrafa Stanley"><ellipse cx="60" cy="140" rx="34" ry="6" fill="#000" opacity=".12"/><path d="M92 50c22 0 22 52 0 52" stroke="#2f5d50" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M30 38h60l-6 94a8 8 0 0 1-8 7H44a8 8 0 0 1-8-7z" fill="#2f5d50"/><path d="M36 50h10l-3 80h-6z" fill="#fff" opacity=".18"/><rect x="26" y="24" width="68" height="16" rx="8" fill="#1d3b33"/><rect x="40" y="14" width="40" height="12" rx="6" fill="#e9ecef"/><rect x="40" y="76" width="44" height="22" rx="4" fill="#fff" opacity=".9"/><text x="62" y="91" text-anchor="middle" font-family="Sora,sans-serif" font-weight="800" font-size="10" fill="#1d3b33">STANLEY</text></svg>`}
 function bumpbox(){return `<div class="bump${S.bump?' on':''}"><div class="bhead">🔥 OFERTA ESPECIAL <span>Só nesta compra</span></div>
 <div class="bbody"><div class="bimg">${bottle()}</div><div><b class="bt">Garrafa Stanley</b><p class="mut" style="margin:2px 0 8px;font-size:14px">Mantém a bebida gelada ou quente por horas. Combina com a sua caixa de som.</p>
