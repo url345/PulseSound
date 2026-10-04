@@ -254,15 +254,24 @@ function bumpbox(){return `<div class="bump${S.bump?' on':''}"><div class="bhead
 <label class="bcheck"><input type="checkbox" ${S.bump?'checked':''} onchange="S.bump=this.checked;const y=scrollY;render();scrollTo(0,y)"><span>SIM! Quero adicionar a Garrafa Stanley por apenas ${R(BUMP)}</span></label></div>`}
 function payment(){const a=S.addr;
  return `${steps(2)}<div class="grid co"><div class="card"><h2 style="font-size:22px">Forma de pagamento</h2><div class="pay">
-${[['pix','Pix','Aprovação na hora'],['card','Cartão de crédito','Até 3x sem juros'],['boleto','Boleto bancário','Aprovação em até 2 dias úteis']].map(p=>`<label><input type="radio" name="p" ${S.pay===p[0]?'checked':''} onchange="S.pay='${p[0]}'"><span><b>${p[1]}</b><br><span class="mut" style="font-size:13px">${p[2]}</span></span></label>`).join('')}</div>
+${[['pix','Pix','Aprovação na hora']].map(p=>`<label><input type="radio" name="p" ${S.pay===p[0]?'checked':''} onchange="S.pay='${p[0]}'"><span><b>${p[1]}</b><br><span class="mut" style="font-size:13px">${p[2]}</span></span></label>`).join('')}</div>
 <div class="mut" style="font-size:14px"><b style="color:var(--ink)">Entrega para:</b> ${a.nome}<br>${a.rua}, ${a.num}${a.comp?' – '+a.comp:''} · ${a.bairro}<br>${a.cidade}/${a.uf} · CEP ${S.cep}</div><div class="trust">${TRUST}</div></div>
-<div class="card"><h3>Resumo completo</h3>${lines(true)}<div id="tot">${totals()}</div>${bumpbox()}<button class="btn p" onclick="finish()">CONCLUIR PEDIDO</button><button class="btn s" onclick="go('checkout')">Voltar</button><p class="sec">🔒 Pagamento seguro</p></div></div>`}
-function finish(){S.order={n:'JBL'+Math.floor(100000+Math.random()*900000),total:sub()+frete()+bumpv(),pay:S.pay,items:S.cart.map(i=>`${i.q}x JBL ${COLORS[i.c].n}`).concat(S.bump?['1x Garrafa Stanley']:[]).join(', ')};S.cart=[];S.bump=false;go('done')}
-function done(){const o=S.order,pm={pix:'Pix',card:'cartão de crédito',boleto:'boleto'}[o.pay];
- const wa=`https://wa.me/5500000000000?text=${encodeURIComponent(`Olá! Fiz o pedido ${o.n} (${o.items}) no valor de ${R(o.total)}, pagamento por ${pm}.`)}`;
+<div class="card"><h3>Resumo completo</h3>${lines(true)}<div id="tot">${totals()}</div>${bumpbox()}<div id="perr" class="msg er"></div><button id="fin" class="btn p" onclick="finish()">GERAR PIX E CONCLUIR</button><button class="btn s" onclick="go('checkout')">Voltar</button><p class="sec">🔒 Pagamento seguro</p></div></div>`}
+function fnd(o,ks){if(!o||typeof o!=='object')return '';for(const k of ks)if(typeof o[k]==='string'&&o[k])return o[k];for(const k in o){const v=fnd(o[k],ks);if(v)return v}return ''}
+async function finish(){const b=$('fin');b.disabled=true;b.textContent='Gerando Pix…';$('perr').textContent='';
+ const items=S.cart.map(i=>({c:i.c,q:i.q})),total=sub()+frete()+bumpv(),desc=S.cart.map(i=>`${i.q}x JBL ${COLORS[i.c].n}`).concat(S.bump?['1x Garrafa Stanley']:[]).join(', ');
+ try{const r=await fetch('/api/charge',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({items,bump:S.bump,cep:S.cep,nome:S.addr.nome})});
+  const d=await r.json();if(!r.ok)throw 0;
+  const pix=fnd(d.charge,['pix_copia_e_cola','pix_copy_paste','copia_e_cola','qr_code','qrcode','brcode','emv','payload','pix_code','code']);
+  let qr=fnd(d.charge,['qr_code_base64','qrcode_base64','qr_code_image','qrcode_image','image']);if(qr&&!/^(data:|https?:)/.test(qr))qr='data:image/png;base64,'+qr;
+  S.order={n:'JBL'+Math.floor(100000+Math.random()*900000),total:d.total||total,items:desc,pix,qr};S.cart=[];S.bump=false;go('done')}
+ catch(e){b.disabled=false;b.textContent='GERAR PIX E CONCLUIR';$('perr').textContent='Não foi possível gerar o Pix agora. Tente de novo em instantes.'}}
+function copyPix(){const t=S.order.pix;try{navigator.clipboard.writeText(t)}catch(e){const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();document.execCommand('copy');a.remove()}$('cp').textContent='Código copiado!'}
+function done(){const o=S.order,wa=`https://wa.me/5500000000000?text=${encodeURIComponent(`Olá! Fiz o pedido ${o.n} (${o.items}) no valor de ${R(o.total)}. Segue o comprovante do Pix.`)}`;
  return `<div class="card empty" style="max-width:520px;margin:20px auto"><div class="ok-ico"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
-<h2>Pedido recebido!</h2><p class="mut">Pedido <b style="color:var(--ink)">${o.n}</b> · ${o.items}<br>Total ${R(o.total)} · pagamento por ${pm}</p>
-<p>Envie o comprovante e acompanhe a entrega pelo WhatsApp.</p><a class="btn p" style="text-decoration:none" href="${wa}" target="_blank" rel="noopener">CONFIRMAR NO WHATSAPP</a><button class="btn s" onclick="go('product')">Voltar à loja</button></div>`}
+<h2>Pedido ${o.n} recebido!</h2><p class="mut">${o.items}<br>Total ${R(o.total)}</p>
+${o.pix?`<h3>Pague com Pix</h3>${o.qr?`<img src="${o.qr}" alt="QR Code Pix" style="width:220px;max-width:100%;background:#fff;padding:8px;border-radius:12px;margin:10px auto;display:block">`:''}<div class="pix">${o.pix}</div><button id="cp" class="btn p" style="margin-top:10px" onclick="copyPix()">COPIAR CÓDIGO PIX</button><p class="mut" style="font-size:13px">No app do seu banco, escolha Pix copia e cola e cole o código.</p>`:`<p>O Pix foi gerado, mas o código não apareceu aqui. Fale com a loja para receber o pagamento.</p>`}
+<a class="btn s" style="text-decoration:none" href="${wa}" target="_blank" rel="noopener">ENVIAR COMPROVANTE NO WHATSAPP</a><button class="btn s" onclick="go('product')">Voltar à loja</button></div>`}
 function render(){$('badge').textContent=cnt();
  if(['checkout','payment'].includes(S.view)&&!S.cart.length)S.view='cart';
  $('app').innerHTML={product,cart,checkout,payment,done}[S.view]();
