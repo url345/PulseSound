@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Estação Som | Caixa de Som JBL</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Sora:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#0b0c0f;--card:#15161a;--ink:#f4f5f7;--mut:#9a9ca4;--line:#2a2c33;--acc:#fe2c55;--acc2:#ff5c7c;--ok:#2fd5a0;--shadow:none}
+:root:not([data-theme="light"]){}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Manrope,system-ui,sans-serif;line-height:1.5}
+h1,h2,h3{font-family:Sora,Manrope,sans-serif;margin:0;line-height:1.15;letter-spacing:-.02em}
+button{font:inherit;cursor:pointer}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.bar{background:var(--ink);color:var(--bg);text-align:center;font-size:13px;padding:8px 12px;font-weight:600}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--card);border-bottom:1px solid var(--line)}
+.nav{max-width:1100px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:12px 16px}
+.logo{font-family:Sora;font-weight:800;font-size:20px;border:0;background:none;color:var(--ink);padding:0}
+.logo b{color:var(--acc)}
+.cartbtn{position:relative;display:flex;gap:8px;align-items:center;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:9px 14px;border-radius:999px;font-weight:700}
+.badge{background:var(--acc);color:#fff;border-radius:999px;font-size:12px;min-width:20px;height:20px;display:grid;place-items:center;padding:0 5px}
+main{max-width:1100px;margin:auto;padding:16px}
+.card{background:var(--card);border-radius:22px;box-shadow:var(--shadow);padding:20px}
+.grid{display:grid;gap:20px}
+@media(min-width:860px){.grid.two{grid-template-columns:1.1fr 1fr}.grid.co{grid-template-columns:1.3fr 1fr;align-items:start}}
+.stage{border-radius:22px;aspect-ratio:1/1;display:grid;place-items:center;background:radial-gradient(circle at 50% 40%,#fff,#e9ecf1);transition:background .3s}
+.stage svg{width:92%;height:auto}
+.thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+.thumb{border:2px solid transparent;background:#eef0f4;border-radius:14px;padding:6px;aspect-ratio:4/3;display:grid;place-items:center}
+.thumb[aria-pressed=true]{border-color:var(--acc)}
+.thumb svg{width:100%;height:auto}
+.tag{display:inline-block;background:#fff1ec;color:var(--acc2);font-weight:700;font-size:13px;padding:4px 10px;border-radius:999px}
+.price{font-family:Sora;font-size:40px;font-weight:800}
+.price small{font-family:Manrope;font-size:14px;color:var(--mut);font-weight:500;display:block}
+.sw{display:flex;gap:12px;flex-wrap:wrap;margin:10px 0 18px}
+.sw button{width:44px;height:44px;border-radius:50%;border:3px solid var(--card);box-shadow:0 0 0 2px var(--line);padding:0}
+.sw button[aria-pressed=true]{box-shadow:0 0 0 3px var(--acc)}
+.qty{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.qty button{width:44px;height:44px;border:0;background:none;color:var(--ink);font-size:20px}
+.qty span{min-width:36px;text-align:center;font-weight:800}
+.btn{display:block;width:100%;border:0;border-radius:16px;padding:16px;font-weight:800;font-size:16px;letter-spacing:.01em}
+.btn.p{background:var(--acc);color:#fff;box-shadow:0 8px 20px rgba(254,44,85,.35)}
+.btn.p:hover{background:var(--acc2)}
+.btn.s{background:var(--card);color:var(--ink);border:2px solid var(--ink);margin-top:10px}
+.btn:disabled{opacity:.5;cursor:not-allowed;box-shadow:none}
+.trust{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+.trust div{background:var(--bg);border-radius:14px;padding:10px 12px;font-size:13px;font-weight:700;display:flex;gap:8px;align-items:center}
+.trust svg{flex:none;color:var(--ok)}
+ul.b{padding-left:18px;margin:10px 0;color:var(--mut)}ul.b li{margin:4px 0}
+.specs{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:14px}
+@media(min-width:700px){.specs{grid-template-columns:repeat(4,1fr)}}
+.spec{background:var(--card);border-radius:18px;padding:16px;box-shadow:var(--shadow)}
+.spec b{font-family:Sora;font-size:22px;display:block}.spec span{color:var(--mut);font-size:13px}
+.row{display:flex;justify-content:space-between;gap:12px;padding:8px 0}
+.row.t{border-top:1px solid var(--line);margin-top:6px;padding-top:14px;font-size:20px;font-weight:800}
+.mut{color:var(--mut)}
+.item{display:flex;gap:14px;align-items:center}
+.item .mini{width:84px;height:84px;border-radius:16px;background:#eef0f4;display:grid;place-items:center;flex:none}
+.item .mini svg{width:90%}
+.steps{display:flex;gap:6px;margin-bottom:16px;font-size:13px;font-weight:700}
+.steps span{flex:1;padding:8px;border-radius:10px;background:var(--line);color:var(--mut);text-align:center}
+.steps .on{background:var(--ink);color:var(--bg)}
+label{display:block;font-size:13px;font-weight:700;margin:12px 0 5px}
+input,select{width:100%;padding:14px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;font-size:16px}
+input.bad{border-color:#d92d20}
+.f2{display:grid;gap:0 12px;grid-template-columns:1fr 1fr}.f2 .w{grid-column:1/-1}
+.msg{font-size:13px;margin-top:6px;font-weight:600}.msg.ok{color:var(--ok)}.msg.er{color:#d92d20}
+.pay{display:grid;gap:10px;margin:10px 0}
+.pay label{display:flex;gap:12px;align-items:center;margin:0;border:2px solid var(--line);border-radius:14px;padding:14px;cursor:pointer;font-size:15px}
+.pay input{width:20px;height:20px;accent-color:var(--acc)}
+.pay label:has(input:checked){border-color:var(--acc);background:#fff6f3}
+@media all{.pay label:has(input:checked){background:#2a1a15}.tag{background:#2a1a15}}
+.bump{margin:16px 0 4px;border:2px dashed var(--acc);border-radius:18px;background:#fff8f5;overflow:hidden;transition:background .2s,border-color .2s}
+.bump.on{border-style:solid;background:#fff1ec}
+.bhead{background:var(--acc);color:#fff;font-weight:800;font-size:14px;padding:8px 14px;display:flex;justify-content:space-between;gap:8px}
+.bhead span{font-weight:600;opacity:.9}
+.bbody{display:flex;gap:14px;align-items:center;padding:14px}
+.bimg{width:84px;flex:none;background:#fff;border-radius:14px;padding:6px}
+.bimg svg{width:100%;display:block}
+.bt{font-family:Sora;font-size:17px;color:#16181d}
+.bp{font-weight:800;color:var(--acc2);font-size:17px}
+.bcheck{display:flex;gap:12px;align-items:center;margin:0;padding:14px;border-top:1px dashed var(--acc);cursor:pointer;font-size:14px;font-weight:800;color:#16181d}
+.bcheck input{width:24px;height:24px;flex:none;accent-color:var(--acc)}
+@media all{.bump,.bump.on{background:#2a1a15}.bt,.bcheck{color:#f2f4f7}}
+.nav{flex-wrap:wrap;gap:8px}.srch{order:5;flex:1 1 100%}.srch input{padding:11px 14px;border-radius:999px;background:var(--bg)}
+@media(min-width:700px){.srch{order:0;flex:1 1 260px}}
+.ic{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:20px;display:grid;place-items:center;padding:0}
+.logo{margin-right:auto}
+.stage{position:relative;overflow:hidden;cursor:zoom-in}.stage svg{transition:transform .25s}.stage.z{cursor:zoom-out}.stage.z svg{transform:scale(2)}
+.cnt{position:absolute;right:12px;bottom:12px;background:rgba(0,0,0,.65);color:#fff;font-size:13px;font-weight:700;padding:4px 10px;border-radius:999px}
+.zh{position:absolute;left:12px;bottom:12px;background:rgba(255,255,255,.85);color:#16181d;font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px}
+.offer{background:#fff3ee;border:2px solid var(--acc);border-radius:18px;padding:14px;margin:12px 0}
+@media all{.offer{background:#2a1a15}}
+.offer .hd{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;font-weight:800;color:var(--acc2)}
+.cd{font-family:Sora;background:var(--acc);color:#fff;border-radius:10px;padding:4px 10px;font-size:15px}
+.pr{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}.off{background:var(--acc);color:#fff;font-weight:800;font-size:13px;padding:3px 8px;border-radius:8px}
+.pixl{display:grid;gap:6px;margin-top:10px;font-weight:700}.pixl div{background:var(--card);border-radius:12px;padding:10px 12px}
+.bn{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0}.bn div{background:var(--bg);border-radius:16px;padding:14px 12px;font-weight:700;font-size:14px}.bn span{display:block;font-size:22px}.bn small{display:block;color:var(--mut);font-weight:500}
+.sec2{margin-top:20px}.sec2 h2{font-size:22px;margin-bottom:12px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}.chip{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:10px 14px;font-weight:700;font-size:14px;min-height:44px}.chip[aria-pressed=true]{background:var(--ink);color:var(--bg)}
+.rv{border-top:1px solid var(--line);padding:12px 0}
+details{border-top:1px solid var(--line);padding:4px 0}summary{cursor:pointer;font-weight:800;padding:14px 0;min-height:44px}details p{margin:0 0 14px;color:var(--mut)}
+.bar2{height:12px;background:var(--line);border-radius:99px;overflow:hidden;margin:6px 0}.bar2 i{display:block;height:100%;background:var(--acc)}
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:25;background:var(--card);border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));display:none;align-items:center;gap:14px;box-shadow:0 -6px 20px rgba(0,0,0,.08)}
+.sticky .btn{flex:1;padding:14px}.sticky b{font-family:Sora;font-size:20px;white-space:nowrap}
+
+footer{padding-bottom:110px}
+.nav{flex-wrap:nowrap;gap:8px;padding:8px 12px}.srch{order:0;flex:1 1 auto;min-width:0}.srch input{padding:11px 16px;border-radius:999px;background:var(--bg);border:0}.ic{border:0;background:none}.bk{margin-left:-6px}
+main.product{max-width:560px;padding:0}main.product .stage{aspect-ratio:1/1;border-radius:0;cursor:default}
+.tabs{position:sticky;top:calc(var(--hh,60px) + env(safe-area-inset-top,0px));z-index:15;background:var(--card);display:flex;overflow-x:auto;border-bottom:1px solid var(--line)}
+.tabs button{flex:none;border:0;background:none;color:var(--mut);font-weight:700;padding:14px 16px;min-height:48px;border-bottom:3px solid transparent}.tabs button:first-child{color:var(--ink);border-color:var(--ink)}
+.blk{background:var(--card);padding:16px;margin-top:8px;scroll-margin-top:calc(var(--hh,60px) + 56px)}.blk h2{font-size:19px;margin-bottom:10px}
+.arr{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:0;background:rgba(0,0,0,.45);color:#fff;font-size:26px;line-height:1;padding:0}.arr.l{left:10px}.arr.r{right:10px}
+.cnt{right:12px;bottom:12px;font-size:14px}
+.pbanner{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:16px;background:linear-gradient(100deg,#ff7a1a,#ff3d2e);color:#fff}
+.pbanner:not(.on){background:var(--card);color:var(--ink)}.pp{font-family:Sora;font-weight:800;font-size:34px}.pp s{font-size:15px;font-weight:600;opacity:.85;display:block}
+.pr2{text-align:right;display:grid;gap:2px;font-size:14px}.pr2 b{font-family:Sora;font-size:17px}.pbanner .off{background:#fff;color:#ff3d2e}
+.pixl div{background:none;padding:0}.gr{color:var(--ok)}
+.trow{display:flex;gap:12px;align-items:flex-start}.trow svg{flex:none;margin-top:3px}
+.opts{display:flex;gap:10px;overflow-x:auto;padding:4px 2px 8px}.opt{flex:none;width:68px;border:2px solid var(--line);border-radius:12px;background:#eef0f4;padding:3px;color:#16181d;font-size:11px;font-weight:700}.opt[aria-pressed=true]{border-color:var(--acc)}.opt svg{width:100%;display:block}
+.store{display:flex;gap:12px;align-items:center}.av{width:48px;height:48px;border-radius:50%;background:var(--acc);display:grid;place-items:center;font-family:Sora;font-weight:800;font-size:20px;color:#fff}
+.sticky{max-width:560px;margin:auto;background:#101114;border-top:1px solid var(--line);gap:10px;padding:8px 12px calc(8px + env(safe-area-inset-bottom,0px))}
+.sb-i{border:0;background:none;color:var(--mut);font-size:12px;display:grid;justify-items:center;gap:2px;min-width:48px;min-height:48px}
+.sb-c{border:0;background:#3a1620;color:var(--acc2);border-radius:12px;width:52px;height:52px;display:grid;place-items:center;flex:none}
+.sb-b{flex:1;border:0;background:var(--acc);color:#fff;border-radius:12px;min-height:52px;padding:6px;font-weight:800;line-height:1.2;font-size:13px}.sb-b b{display:block;font-size:19px;font-family:Sora;white-space:normal}.sb-b span{font-weight:600;font-size:12px}
+.sec{text-align:center;color:var(--mut);font-size:13px;margin-top:12px}
+.empty{text-align:center;padding:40px 10px}
+footer{text-align:center;color:var(--mut);font-size:13px;padding:30px 16px 90px}
+.ok-ico{width:72px;height:72px;border-radius:50%;background:var(--ok);color:#fff;display:grid;place-items:center;margin:0 auto 14px}
+.pix{background:var(--bg);border-radius:14px;padding:12px;font-size:13px;word-break:break-all;margin-top:10px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header id="hd"><div class="nav"><button class="ic bk" onclick="go('product')" aria-label="Voltar"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg></button>
+<form class="srch" onsubmit="event.preventDefault();go('product')"><input type="search" placeholder="Pesquisar" aria-label="Pesquisar"></form>
+<button class="ic" id="fav" onclick="S.fav=!S.fav;this.textContent=S.fav?'♥':'♡';this.style.color=S.fav?'#fe2c55':''" aria-label="Favoritar">♡</button>
+<button class="ic" onclick="share()" aria-label="Compartilhar"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg></button>
+<button class="ic" style="position:relative" onclick="go('cart')" aria-label="Abrir carrinho"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M3 4h2l2.4 11h10.2L20 7H6"/><circle cx="9" cy="20" r="1.5"/><circle cx="17" cy="20" r="1.5"/></svg><span class="badge" id="badge" style="position:absolute;top:-4px;right:-4px">0</span></button></div></header>
+<main id="app"></main>
+<div class="sticky" id="sb"></div>
+<footer>© Estação Som · Compra segura · Envio para todo o Brasil<br>Produto de marca JBL. Loja independente.</footer>
+
+<script>
+const CFG={orig:0,offerEnd:'',pixOff:0,inst:0,stock:{left:0,total:0},reviews:[],specs:[],warranty:'',faq:[]};
+const PRICE=100,FRETE=11.5,BUMP=32.5;
+const COLORS=[{n:'Preto',h:'#1b1d22',bg:'#e9ecf1'},{n:'Azul',h:'#1f5fd1',bg:'#e3ecfb'},{n:'Vermelho',h:'#e11d2e',bg:'#fbe6e8'},{n:'Verde',h:'#1f9d63',bg:'#e2f4ea'},{n:'Rosa',h:'#f2619c',bg:'#fde8f1'},{n:'Cinza',h:'#8a93a3',bg:'#eceef2'}];
+const S={view:'product',color:0,qty:1,view3:'front',cart:[],cep:'',cepOk:false,addr:{},pay:'pix',bump:false,order:null};
+const R=v=>'R$ '+v.toFixed(2).replace('.',',');
+const $=id=>document.getElementById(id);
+function spk(c,v){const h=COLORS[c].h;
+ const grille=Array.from({length:7},(_,i)=>`<rect x="${70+i*8}" y="92" width="3" height="76" rx="1.5" fill="#000" opacity=".28"/>`).join('')+Array.from({length:7},(_,i)=>`<rect x="${300+i*8}" y="92" width="3" height="76" rx="1.5" fill="#000" opacity=".28"/>`).join('');
+ if(v==='front')return `<svg viewBox="0 0 440 260" role="img" aria-label="Caixa de som JBL ${COLORS[c].n}, vista frontal"><ellipse cx="220" cy="228" rx="170" ry="12" fill="#000" opacity=".12"/><rect x="40" y="60" width="360" height="150" rx="75" fill="${h}"/><rect x="40" y="60" width="360" height="70" rx="35" fill="#fff" opacity=".1"/>${grille}<circle cx="220" cy="130" r="32" fill="#000" opacity=".22"/><circle cx="220" cy="130" r="26" fill="${h}" stroke="#fff" stroke-opacity=".35" stroke-width="2"/><text x="220" y="137" text-anchor="middle" font-family="Sora,sans-serif" font-weight="800" font-size="19" fill="#fff">JBL</text><rect x="150" y="190" width="140" height="6" rx="3" fill="#fff" opacity=".25"/></svg>`;
+ if(v==='side')return `<svg viewBox="0 0 440 260"><ellipse cx="220" cy="228" rx="90" ry="10" fill="#000" opacity=".12"/><circle cx="220" cy="135" r="92" fill="${h}"/><circle cx="220" cy="135" r="70" fill="#000" opacity=".2"/><circle cx="220" cy="135" r="62" fill="${h}"/><circle cx="220" cy="135" r="22" fill="#000" opacity=".22"/><circle cx="220" cy="135" r="48" fill="none" stroke="#fff" stroke-opacity=".3" stroke-width="3"/><path d="M130 100a92 92 0 0 1 90-47" stroke="#fff" stroke-opacity=".25" stroke-width="6" fill="none" stroke-linecap="round"/></svg>`;
+ return `<svg viewBox="0 0 440 260"><ellipse cx="220" cy="232" rx="170" ry="10" fill="#000" opacity=".1"/><rect x="40" y="95" width="360" height="100" rx="50" fill="${h}"/><rect x="60" y="105" width="320" height="22" rx="11" fill="#000" opacity=".2"/>${[0,1,2,3,4].map(i=>`<circle cx="${150+i*35}" cy="116" r="7" fill="#fff" opacity="${i==2?.9:.5}"/>`).join('')}<rect x="60" y="140" width="320" height="40" rx="20" fill="#fff" opacity=".08"/><text x="220" y="167" text-anchor="middle" font-family="Sora,sans-serif" font-weight="800" font-size="20" fill="#fff" opacity=".9">JBL</text></svg>`}
+const ICON='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>';
+const TRUST=['Compra segura','Pagamento seguro','Envio para todo o Brasil','Suporte via WhatsApp'].map(t=>`<div>${ICON}${t}</div>`).join('');
+const cnt=()=>S.cart.reduce((a,i)=>a+i.q,0);
+const sub=()=>S.cart.reduce((a,i)=>a+i.q*PRICE,0);
+const bumpv=()=>S.bump?BUMP:0;
+const frete=()=>S.cepOk&&S.cart.length?FRETE:0;
+function go(v){S.view=v;render();window.scrollTo(0,0)}
+function add(buy){const f=S.cart.find(i=>i.c===S.color);f?f.q+=S.qty:S.cart.push({c:S.color,q:S.qty});buy?go('cart'):(toast());render()}
+function toast(){const b=$('badge');b.parentElement.animate([{transform:'scale(1)'},{transform:'scale(1.12)'},{transform:'scale(1)'}],{duration:300})}
+function chg(i,d){S.cart[i].q+=d;if(S.cart[i].q<1)S.cart.splice(i,1);render()}
+function mask(v,t){v=v.replace(/\D/g,'');if(t==='cep')return v.slice(0,8).replace(/(\d{5})(\d)/,'$1-$2');
+ if(t==='cpf')return v.slice(0,11).replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d{1,2})$/,'$1-$2');
+ return v.slice(0,11).replace(/(\d{2})(\d)/,'($1) $2').replace(/(\d{5})(\d{1,4})$/,'$1-$2')}
+function cpfOk(c){c=c.replace(/\D/g,'');if(c.length!==11||/^(\d)\1+$/.test(c))return false;
+ for(let t=9;t<11;t++){let s=0;for(let i=0;i<t;i++)s+=c[i]*(t+1-i);if((s*10%11)%10!=c[t])return false}return true}
+async function setCep(v,ids){S.cep=mask(v,'cep');const raw=S.cep.replace(/\D/g,'');const m=$('cepmsg');
+ if(raw.length<8){S.cepOk=false;if(m){m.textContent='';m.className='msg'}upd();return}
+ if(m){m.textContent='Consultando CEP…';m.className='msg'}
+ let ok=true;try{const r=await fetch('https://viacep.com.br/ws/'+raw+'/json/');const d=await r.json();
+  if(d.erro)ok=false;else{S.addr={...S.addr,rua:d.logradouro||S.addr.rua||'',bairro:d.bairro||S.addr.bairro||'',cidade:d.localidade||'',uf:d.uf||''};
+   ['rua','bairro','cidade','uf'].forEach(k=>{const e=$(k);if(e&&S.addr[k])e.value=S.addr[k]})}}catch(e){}
+ S.cepOk=ok;if(m){m.textContent=ok?'CEP válido. Frete de entrega: '+R(FRETE):'CEP não encontrado. Confira os números.';m.className='msg '+(ok?'ok':'er')}upd()}
+function upd(){const t=$('tot');if(t)t.innerHTML=totals();const b=$('go');if(b)b.disabled=!S.cepOk;const c=$('cepin');if(c&&c.value!==S.cep)c.value=S.cep}
+function totals(){const f=frete();return `<div class="row"><span class="mut">Subtotal (${cnt()} ${cnt()>1?'itens':'item'})</span><b>${R(sub())}</b></div>
+<div class="row"><span class="mut">Frete de entrega</span><b>${S.cepOk?R(f):'Informe o CEP'}</b></div>
+${S.bump?`<div class="row"><span class="mut">Garrafa Stanley</span><b>${R(BUMP)}</b></div>`:''}
+<div class="row t"><span>Total</span><span>${R(sub()+f+bumpv())}</span></div>`}
+function lines(ro){return S.cart.map((it,i)=>`<div class="item" style="padding:10px 0"><div class="mini" style="background:${COLORS[it.c].bg}">${spk(it.c,'front')}</div>
+<div style="flex:1"><b>Caixa de Som JBL</b><div class="mut" style="font-size:14px">Cor: ${COLORS[it.c].n} · ${R(PRICE)} un.</div>
+${ro?`<div class="mut" style="font-size:14px">Quantidade: ${it.q}</div>`:`<div class="qty" style="margin-top:6px"><button onclick="chg(${i},-1)" aria-label="Diminuir">−</button><span>${it.q}</span><button onclick="chg(${i},1)" aria-label="Aumentar">+</button></div>`}</div><b>${R(it.q*PRICE)}</b></div>`).join('')+(S.bump?`<div class="item" style="padding:10px 0"><div class="mini" style="background:#e4efe9">${bottle()}</div><div style="flex:1"><b>Garrafa Stanley</b><div class="mut" style="font-size:14px">Oferta especial · Quantidade: 1</div></div><b>${R(BUMP)}</b></div>`:'')}
+function stanleyCard(){return `<div class="bump${S.bump?' on':''}" style="margin-top:14px"><div class="bbody"><div class="bimg">${bottle()}</div><div style="flex:1"><b class="bt">Garrafa Stanley</b><div style="margin:2px 0 8px"><s class="mut" style="font-size:13px">R$ 59,90</s> <span class="bp">${R(BUMP)}</span></div>
+<button class="btn ${S.bump?'s':'p'}" style="padding:10px;font-size:14px;margin:0" onclick="S.bump=!S.bump;const y=scrollY;render();scrollTo(0,y)">${S.bump?'REMOVER':'ADICIONAR'}</button></div></div></div>`}
+function calcCard(){const q=S.qty;return `<div class="card" style="margin-top:14px"><div class="row" style="padding-top:0"><span class="mut">Caixa de som JBL${q>1?' ('+q+'x)':''}</span><b>${R(PRICE*q)}</b></div>
+<div class="row"><span class="mut">Frete</span><b>${R(FRETE)}</b></div>${S.bump?`<div class="row"><span class="mut">Garrafa Stanley</span><b>${R(BUMP)}</b></div>`:''}
+<div class="row t"><span>Total</span><span>${R(PRICE*q+FRETE+bumpv())}</span></div><div class="mut" style="font-size:13px">Chega em até 7 dias úteis</div></div>`}
+function share(){const d={title:document.title,url:location.href};try{navigator.share?navigator.share(d):navigator.clipboard.writeText(d.url)}catch(e){}}
+function zoom(e){const el=e.currentTarget;el.classList.toggle('z');const r=el.getBoundingClientRect(),t=e.touches?e.touches[0]:e;el.firstElementChild.style.transformOrigin=((t.clientX-r.left)/r.width*100)+'% '+((t.clientY-r.top)/r.height*100)+'%'}
+function tick(){const e=$('cd');if(!e||!CFG.offerEnd)return;let d=Math.max(0,new Date(CFG.offerEnd)-Date.now());const p=n=>String(Math.floor(n)).padStart(2,'0');e.textContent=p(d/36e5)+':'+p(d/6e4%60)+':'+p(d/1e3%60)}
+setInterval(tick,1000);
+function rvAvg(){const r=CFG.reviews;return r.length?r.reduce((a,x)=>a+x.s,0)/r.length:0}
+function gal(d){const v=['front','side','top'];S.view3=v[(v.indexOf(S.view3)+d+3)%3];render()}
+function sc(id){const e=$(id);e&&e.scrollIntoView({behavior:'smooth',block:'start'})}
+function product(){const c=COLORS[S.color],vs=['front','side','top'],on=CFG.orig>PRICE,cd=on&&CFG.offerEnd&&new Date(CFG.offerEnd)>Date.now(),n=CFG.reviews.length;
+ const pix=CFG.pixOff>0?PRICE*(1-CFG.pixOff/100):0,pl=(pix||CFG.inst>1)?`<div class="blk"><div class="pixl" style="display:grid;gap:8px;font-weight:700">${pix?`<div><span class="gr">${R(pix)}</span> no Pix <span class="gr">(${CFG.pixOff}% de desconto)</span></div>`:''}${CFG.inst>1?`<div>💳 ${CFG.inst}x ${R(PRICE/CFG.inst)} sem juros</div>`:''}</div></div>`:'';
+ const buy=`<button class="btn p" onclick="add(true)">COMPRAR AGORA</button><button class="btn s" onclick="add(false)">Adicionar ao carrinho</button>`;
+ const st=CFG.stock.total>0?`<div class="blk"><b>Estoque</b><div class="bar2"><i style="width:${Math.round(CFG.stock.left/CFG.stock.total*100)}%"></i></div><span class="mut" style="font-size:13px">Últimas unidades · oferta válida enquanto durar o estoque</span></div>`:'';
+ const ck=t=>`<div style="padding:4px 0"><span style="color:var(--ok)">✓</span> ${t}</div>`;
+ return `<nav class="tabs"><button onclick="scrollTo({top:0,behavior:'smooth'})">Visão geral</button><button onclick="sc('t2')">Avaliações</button><button onclick="sc('t3')">Descrição</button><button onclick="sc('t4')">Perguntas</button></nav>
+<div class="stage" style="background:radial-gradient(circle at 50% 40%,#fff,${c.bg})">${spk(S.color,S.view3)}<button class="arr l" onclick="gal(-1)" aria-label="Foto anterior">‹</button><button class="arr r" onclick="gal(1)" aria-label="Próxima foto">›</button><span class="cnt">${vs.indexOf(S.view3)+1}/${vs.length}</span></div>
+<div class="pbanner${on?' on':''}"><div class="pp">${on?`<s>${R(CFG.orig)}</s>`:''}${R(PRICE)}${on?` <span class="off">-${Math.round((1-PRICE/CFG.orig)*100)}%</span>`:''}</div><div class="pr2">${on?`<b>Oferta Relâmpago</b>${cd?`<span>Termina em <span id="cd">00:00:00</span></span>`:''}`:`<b>Chega em até 7 dias úteis</b><span class="mut">Envio para todo o Brasil</span>`}</div></div>${pl}
+<div class="blk"><h1 style="font-size:19px;line-height:1.3">Caixa de Som JBL - ${c.n}</h1><div class="mut" style="margin-top:8px;font-weight:700">${n?`<span style="color:#f5a300">★</span> ${rvAvg().toFixed(1).replace('.',',')} (${n})`:'☆ Sem avaliações ainda · seja o primeiro a avaliar'}</div></div>
+<div class="blk"><div class="trow"><span style="font-size:22px">🚚</span><div><b>Frete único de ${R(FRETE)}</b> <span class="mut">para todo o Brasil</span><div class="mut" style="font-size:14px">Prazo estimado: chega em até 7 dias úteis.</div></div></div></div>
+<div class="blk"><b>${COLORS.length} opções disponíveis</b> <span class="mut">· ${c.n}</span><div class="opts" role="group" aria-label="Cores">${COLORS.map((k,i)=>`<button class="opt" style="background:${k.bg}" aria-pressed="${S.color===i}" aria-label="${k.n}" onclick="S.color=${i};render()">${spk(i,'front')}${k.n}</button>`).join('')}</div>
+<label>Quantidade</label><div class="qty"><button onclick="S.qty=Math.max(1,S.qty-1);render()" aria-label="Diminuir">−</button><span>${S.qty}</span><button onclick="S.qty=Math.min(10,S.qty+1);render()" aria-label="Aumentar">+</button></div></div>
+<div class="blk"><b>🛡️ Compra segura</b><div style="margin-top:8px">${ck('Pagamento seguro')}${ck('Seus dados protegidos')}${ck('Suporte via WhatsApp')}${ck('Envio para todo o Brasil')}</div>${CFG.warranty?`<p class="mut">${CFG.warranty}</p>`:''}</div>${st}
+<div class="blk">${calcCard().replace('class="card" style="margin-top:14px"','style=""')}</div>
+<div class="blk" id="t2"><h2>Avaliações dos clientes${n?` (${n})`:''}</h2><div class="mut" style="font-weight:700">${n?`★ ${rvAvg().toFixed(1).replace('.',',')}/5`:'Ainda não há avaliações. Seja o primeiro a avaliar depois da sua compra.'}</div>
+<div class="chips">${[5,4,3,2,1].map(k=>`<button class="chip" aria-pressed="${S.rf===k}" onclick="S.rf=S.rf===${k}?0:${k};render()">${'★'.repeat(k)}${'☆'.repeat(5-k)} (${CFG.reviews.filter(r=>r.s===k).length})</button>`).join('')}</div>
+${CFG.reviews.filter(r=>!S.rf||r.s===S.rf).map(r=>`<div class="rv"><b>${r.n}</b> <span style="color:#f5a300">${'★'.repeat(r.s)}</span> <span class="mut" style="font-size:13px">${r.d}</span><p style="margin:4px 0 0">${r.t}</p></div>`).join('')}</div>
+<div class="blk" id="t3"><h2>Descrição</h2><p style="margin:0" class="mut">Caixa de som portátil da marca JBL, para festas, viagens, praia, churrascos e uso no dia a dia. Escolha a cor que combina com você.</p>${CFG.specs.length?`<h2 style="margin-top:18px">Por que comprar?</h2><ul class="b">${CFG.specs.map(x=>`<li>${x}</li>`).join('')}</ul>`:''}</div>
+<div class="blk" id="t4"><h2>Perguntas frequentes</h2>${[['Como funciona a entrega?','Enviamos para todo o Brasil. O frete é único: '+R(FRETE)+'.'],['Qual o prazo de envio?','O pedido chega em até 7 dias úteis.'],['Quais formas de pagamento?','Na etapa de pagamento você escolhe entre Pix, cartão de crédito e boleto.'],...CFG.faq].map(q=>`<details><summary>${q[0]}</summary><p>${q[1]}</p></details>`).join('')}</div>
+<div class="blk" style="margin-bottom:8px">${buy}</div>`}
+function cart(){if(!S.cart.length)return `<div class="card empty"><h2>Seu carrinho está vazio</h2><p class="mut">Escolha a cor da sua caixa de som e adicione ao carrinho.</p><button class="btn p" style="max-width:280px;margin:auto" onclick="go('product')">Ver produto</button></div>`;
+ return `<h1 style="font-size:28px;margin:6px 0 16px">Seu carrinho</h1><div class="grid co"><div><div class="card">${lines(false)}</div>${stanleyCard()}</div><div class="card"><h3>Resumo do pedido</h3>
+<label for="cepin">Calcular frete (CEP)</label><input id="cepin" inputmode="numeric" placeholder="00000-000" value="${S.cep}" oninput="this.value=mask(this.value,'cep');setCep(this.value)"><div id="cepmsg" class="msg ${S.cepOk?'ok':''}">${S.cepOk?'CEP válido. Frete de entrega: '+R(FRETE):''}</div>
+<div id="tot" style="margin-top:8px">${totals()}</div><button id="go" class="btn p" ${S.cepOk?'':'disabled'} onclick="go('checkout')">FINALIZAR COMPRA</button>
+<p class="sec">${S.cepOk?'':'Informe o CEP para liberar a compra.'}</p></div></div>`}
+function steps(n){return `<div class="steps"><span class="${n==1?'on':''}">1. Entrega</span><span class="${n==2?'on':''}">2. Pagamento</span><span>3. Pronto</span></div>`}
+function fld(id,l,ph,ex=''){return `<div class="${ex}"><label for="${id}">${l}</label><input id="${id}" value="${S.addr[id]||''}" placeholder="${ph}" oninput="S.addr.${id}=this.value;this.classList.remove('bad')"></div>`}
+function checkout(){return `${steps(1)}<div class="grid co"><div class="card"><h2 style="font-size:22px">Seus dados e entrega</h2><div class="f2">
+${fld('nome','Nome completo','Maria da Silva','w')}${fld('cpf','CPF','000.000.000-00')}${fld('tel','Telefone / WhatsApp','(00) 00000-0000')}
+<div class="w"><label for="cepin">CEP</label><input id="cepin" inputmode="numeric" placeholder="00000-000" value="${S.cep}" oninput="this.value=mask(this.value,'cep');setCep(this.value)"><div id="cepmsg" class="msg ${S.cepOk?'ok':''}">${S.cepOk?'CEP válido. Frete de entrega: '+R(FRETE):'Digite o CEP para preencher o endereço e calcular o frete.'}</div></div>
+${fld('rua','Rua','Nome da rua','w')}${fld('num','Número','123')}${fld('comp','Complemento','Apto, bloco (opcional)')}${fld('bairro','Bairro','Bairro')}${fld('cidade','Cidade','Cidade')}
+<div class="w"><label for="uf">Estado</label><select id="uf" onchange="S.addr.uf=this.value"><option value="">Selecione</option>${'AC AL AP AM BA CE DF ES GO MA MT MS MG PA PB PR PE PI RJ RN RS RO RR SC SP SE TO'.split(' ').map(u=>`<option ${S.addr.uf===u?'selected':''}>${u}</option>`).join('')}</select></div></div>
+<div id="err" class="msg er"></div></div>
+<div class="card"><h3>Resumo</h3>${lines(true)}<div id="tot">${totals()}</div>${bumpbox()}<button class="btn p" onclick="toPay()">IR PARA O PAGAMENTO</button><button class="btn s" onclick="go('cart')">Voltar ao carrinho</button><p class="sec">🔒 Seus dados estão protegidos</p></div></div>`}
+function toPay(){const a=S.addr,miss=[];
+ if(!a.nome||a.nome.trim().split(' ').length<2)miss.push('nome');if(!cpfOk(a.cpf||''))miss.push('cpf');if((a.tel||'').replace(/\D/g,'').length<10)miss.push('tel');
+ ['rua','num','bairro','cidade'].forEach(k=>{if(!a[k])miss.push(k)});
+ if(!S.cepOk){$('cepin').classList.add('bad');miss.push('cep')}
+ if(!a.uf)miss.push('uf');
+ if(miss.length){miss.forEach(k=>{const e=$(k==='cep'?'cepin':k);e&&e.classList.add('bad')});$('err').textContent='Confira os campos em vermelho. '+(miss.includes('cpf')?'O CPF precisa ser válido.':'');return}
+ go('payment')}
+document.addEventListener('input',e=>{if(e.target.id==='cpf'){e.target.value=mask(e.target.value,'cpf');S.addr.cpf=e.target.value}if(e.target.id==='tel'){e.target.value=mask(e.target.value,'tel');S.addr.tel=e.target.value}});
+function bottle(){return `<svg viewBox="0 0 120 150" role="img" aria-label="Garrafa Stanley"><ellipse cx="60" cy="140" rx="34" ry="6" fill="#000" opacity=".12"/><path d="M92 50c22 0 22 52 0 52" stroke="#2f5d50" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M30 38h60l-6 94a8 8 0 0 1-8 7H44a8 8 0 0 1-8-7z" fill="#2f5d50"/><path d="M36 50h10l-3 80h-6z" fill="#fff" opacity=".18"/><rect x="26" y="24" width="68" height="16" rx="8" fill="#1d3b33"/><rect x="40" y="14" width="40" height="12" rx="6" fill="#e9ecef"/><rect x="40" y="76" width="44" height="22" rx="4" fill="#fff" opacity=".9"/><text x="62" y="91" text-anchor="middle" font-family="Sora,sans-serif" font-weight="800" font-size="10" fill="#1d3b33">STANLEY</text></svg>`}
+function bumpbox(){return `<div class="bump${S.bump?' on':''}"><div class="bhead">🔥 OFERTA ESPECIAL <span>Só nesta compra</span></div>
+<div class="bbody"><div class="bimg">${bottle()}</div><div><b class="bt">Garrafa Stanley</b><p class="mut" style="margin:2px 0 8px;font-size:14px">Mantém a bebida gelada ou quente por horas. Combina com a sua caixa de som.</p>
+<div><s class="mut">R$ 59,90</s> <span class="bp">por apenas ${R(BUMP)}</span></div></div></div>
+<label class="bcheck"><input type="checkbox" ${S.bump?'checked':''} onchange="S.bump=this.checked;const y=scrollY;render();scrollTo(0,y)"><span>SIM! Quero adicionar a Garrafa Stanley por apenas ${R(BUMP)}</span></label></div>`}
+function payment(){const a=S.addr;
+ return `${steps(2)}<div class="grid co"><div class="card"><h2 style="font-size:22px">Forma de pagamento</h2><div class="pay">
+${[['pix','Pix','Aprovação na hora'],['card','Cartão de crédito','Até 3x sem juros'],['boleto','Boleto bancário','Aprovação em até 2 dias úteis']].map(p=>`<label><input type="radio" name="p" ${S.pay===p[0]?'checked':''} onchange="S.pay='${p[0]}'"><span><b>${p[1]}</b><br><span class="mut" style="font-size:13px">${p[2]}</span></span></label>`).join('')}</div>
+<div class="mut" style="font-size:14px"><b style="color:var(--ink)">Entrega para:</b> ${a.nome}<br>${a.rua}, ${a.num}${a.comp?' – '+a.comp:''} · ${a.bairro}<br>${a.cidade}/${a.uf} · CEP ${S.cep}</div><div class="trust">${TRUST}</div></div>
+<div class="card"><h3>Resumo completo</h3>${lines(true)}<div id="tot">${totals()}</div>${bumpbox()}<button class="btn p" onclick="finish()">CONCLUIR PEDIDO</button><button class="btn s" onclick="go('checkout')">Voltar</button><p class="sec">🔒 Pagamento seguro</p></div></div>`}
+function finish(){S.order={n:'JBL'+Math.floor(100000+Math.random()*900000),total:sub()+frete()+bumpv(),pay:S.pay,items:S.cart.map(i=>`${i.q}x JBL ${COLORS[i.c].n}`).concat(S.bump?['1x Garrafa Stanley']:[]).join(', ')};S.cart=[];S.bump=false;go('done')}
+function done(){const o=S.order,pm={pix:'Pix',card:'cartão de crédito',boleto:'boleto'}[o.pay];
+ const wa=`https://wa.me/5500000000000?text=${encodeURIComponent(`Olá! Fiz o pedido ${o.n} (${o.items}) no valor de ${R(o.total)}, pagamento por ${pm}.`)}`;
+ return `<div class="card empty" style="max-width:520px;margin:20px auto"><div class="ok-ico"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+<h2>Pedido recebido!</h2><p class="mut">Pedido <b style="color:var(--ink)">${o.n}</b> · ${o.items}<br>Total ${R(o.total)} · pagamento por ${pm}</p>
+<p>Envie o comprovante e acompanhe a entrega pelo WhatsApp.</p><a class="btn p" style="text-decoration:none" href="${wa}" target="_blank" rel="noopener">CONFIRMAR NO WHATSAPP</a><button class="btn s" onclick="go('product')">Voltar à loja</button></div>`}
+function render(){$('badge').textContent=cnt();
+ if(['checkout','payment'].includes(S.view)&&!S.cart.length)S.view='cart';
+ $('app').innerHTML={product,cart,checkout,payment,done}[S.view]();
+ const sb=$('sb');sb.style.display=S.view==='product'?'flex':'none';sb.innerHTML=`<button class="sb-i" onclick="go('product')"><span style="font-size:20px">🏠</span>Loja</button><button class="sb-c" onclick="add(false)" aria-label="Adicionar ao carrinho"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M3 4h2l2.4 11h10.2L20 7H6"/><circle cx="9" cy="20" r="1.5"/><circle cx="17" cy="20" r="1.5"/></svg></button><button class="sb-b" onclick="add(true)"><b>${R(PRICE)}</b><span>Comprar agora | Frete ${R(FRETE)}</span></button>`;$('app').className=S.view;document.documentElement.style.setProperty('--hh',$('hd').offsetHeight+'px');tick()}
+render();
+</script>
+</body>
+</html>
