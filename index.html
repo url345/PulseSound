@@ -130,6 +130,7 @@ main.product{max-width:560px;padding:0}main.product .stage{aspect-ratio:1/1;bord
 .cam{width:26px;height:26px;border-radius:50%;border:0;background:var(--line);color:var(--ink);padding:0;margin:0 8px 0 6px;vertical-align:middle;position:relative;display:inline-grid;place-items:center}.cam::after{content:'';position:absolute;inset:-9px}
 .lb{position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.92);display:grid;align-content:center;justify-items:center;overflow:auto;padding:16px;gap:12px}.lb img{max-width:100%;max-height:80vh;border-radius:12px}
 .pixcode{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;word-break:normal;font-size:14px}
+.lgo{border:0;background:none;padding:0;width:38px;height:38px;flex:none;margin-left:-2px}.lgo img{width:100%;height:100%;object-fit:contain;border-radius:8px;display:block}
 .sec{text-align:center;color:var(--mut);font-size:13px;margin-top:12px}
 .empty{text-align:center;padding:40px 10px}
 footer{text-align:center;color:var(--mut);font-size:13px;padding:30px 16px 90px}
@@ -139,7 +140,7 @@ footer{text-align:center;color:var(--mut);font-size:13px;padding:30px 16px 90px}
 </style>
 </head>
 <body>
-<header id="hd"><div class="nav"><button class="ic bk" onclick="go('product')" aria-label="Voltar"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg></button>
+<header id="hd"><div class="nav"><button class="lgo" onclick="go('product')" aria-label="Início"><img src="file_000000006e50820ebb3b8c12cb7e3ac5.png" alt="Logo da loja" onerror="this.parentElement.style.display='none'"></button><button class="ic bk" id="bk" onclick="go('product')" aria-label="Voltar"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg></button>
 <form class="srch" onsubmit="event.preventDefault();go('product')"><input type="search" placeholder="Pesquisar" aria-label="Pesquisar"></form>
 <button class="ic" id="fav" onclick="S.fav=!S.fav;this.textContent=S.fav?'♥':'♡';this.style.color=S.fav?'#fe2c55':''" aria-label="Favoritar">♡</button>
 <button class="ic" onclick="share()" aria-label="Compartilhar"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg></button>
@@ -277,7 +278,7 @@ ${(o.pix||o.qr)?`<h3>Pague com Pix</h3>${o.qr?`<img src="${o.qr}" alt="QR Code P
 function render(){$('badge').textContent=cnt();
  if(['checkout','payment'].includes(S.view)&&!S.cart.length)S.view='cart';
  $('app').innerHTML={product,cart,checkout,payment,done}[S.view]();
- const sb=$('sb');sb.style.display=S.view==='product'?'flex':'none';sb.innerHTML=`<button class="sb-i" onclick="go('product')"><span style="font-size:20px">🏠</span>Loja</button><button class="sb-c" onclick="add(false)" aria-label="Adicionar ao carrinho"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M3 4h2l2.4 11h10.2L20 7H6"/><circle cx="9" cy="20" r="1.5"/><circle cx="17" cy="20" r="1.5"/></svg></button><button class="sb-b" onclick="add(true)"><b>${R(PRICE)}</b><span>Comprar agora</span></button>`;$('app').className=S.view;document.documentElement.style.setProperty('--hh',$('hd').offsetHeight+'px');tick()}
+ const sb=$('sb');sb.style.display=S.view==='product'?'flex':'none';sb.innerHTML=`<button class="sb-i" onclick="go('product')"><span style="font-size:20px">🏠</span>Loja</button><button class="sb-c" onclick="add(false)" aria-label="Adicionar ao carrinho"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M3 4h2l2.4 11h10.2L20 7H6"/><circle cx="9" cy="20" r="1.5"/><circle cx="17" cy="20" r="1.5"/></svg></button><button class="sb-b" onclick="add(true)"><b>${R(PRICE)}</b><span>Comprar agora</span></button>`;$('app').className=S.view;$('bk').style.display=S.view==='product'?'none':'';document.documentElement.style.setProperty('--hh',$('hd').offsetHeight+'px');tick()}
 render();
 </script>
 </body>
