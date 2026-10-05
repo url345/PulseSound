@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -130,6 +129,7 @@ main.product{max-width:560px;padding:0}main.product .stage{aspect-ratio:1/1;bord
 .rav{position:relative;width:44px;height:44px;border-radius:50%;background:var(--acc);color:#fff;display:grid;place-items:center;font-weight:800;flex:none;overflow:hidden}.rav img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .cam{width:26px;height:26px;border-radius:50%;border:0;background:var(--line);color:var(--ink);padding:0;margin:0 8px 0 6px;vertical-align:middle;position:relative;display:inline-grid;place-items:center}.cam::after{content:'';position:absolute;inset:-9px}
 .lb{position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.92);display:grid;align-content:center;justify-items:center;overflow:auto;padding:16px;gap:12px}.lb img{max-width:100%;max-height:80vh;border-radius:12px}
+.pixcode{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;word-break:normal;font-size:14px}
 .sec{text-align:center;color:var(--mut);font-size:13px;margin-top:12px}
 .empty{text-align:center;padding:40px 10px}
 footer{text-align:center;color:var(--mut);font-size:13px;padding:30px 16px 90px}
@@ -266,14 +266,14 @@ async function finish(){const b=$('fin');b.disabled=true;b.textContent='Gerando 
   let pix='',qr='';const walk=(o,k)=>{if(typeof o==='string'){if(!pix&&/^000201/.test(o))pix=o;else if(!qr&&(/^data:image/.test(o)||(/qr/i.test(k)&&(/^https?:\/\//.test(o)||(o.length>200&&/^[A-Za-z0-9+/=]+$/.test(o))))))qr=o}else if(o&&typeof o==='object')for(const x in o)walk(o[x],x)};walk(d.charge,'');
   if(!pix)pix=fnd(d.charge,['pix_copia_e_cola','pix_copy_paste','copia_e_cola','qr_code','qrcode','brcode','emv','payload','pix_code','code']);
   if(!qr)qr=fnd(d.charge,['qr_code_base64','qrcode_base64','qr_code_image','qrcode_image','image']);if(qr&&!/^(data:|https?:)/.test(qr))qr='data:image/png;base64,'+qr;
-  S.order={n:'JBL'+Math.floor(100000+Math.random()*900000),total:d.total||total,items:desc,pix,qr,raw:JSON.stringify(d.charge,null,1)};S.cart=[];S.bump=false;go('done')}
+  S.order={n:'JBL'+Math.floor(100000+Math.random()*900000),total:d.total||total,items:desc,pix,qr};S.cart=[];S.bump=false;go('done')}
  catch(e){b.disabled=false;b.textContent='GERAR PIX E CONCLUIR';$('perr').textContent='Não foi possível gerar o Pix agora. Tente de novo em instantes.'}}
 function copyPix(){const t=S.order.pix;try{navigator.clipboard.writeText(t)}catch(e){const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();document.execCommand('copy');a.remove()}$('cp').textContent='Código copiado!'}
 function done(){const o=S.order,wa=`https://wa.me/5500000000000?text=${encodeURIComponent(`Olá! Fiz o pedido ${o.n} (${o.items}) no valor de ${R(o.total)}. Segue o comprovante do Pix.`)}`;
  return `<div class="card empty" style="max-width:520px;margin:20px auto"><div class="ok-ico"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
 <h2>Pedido ${o.n} recebido!</h2><p class="mut">${o.items}<br>Total ${R(o.total)}</p>
-${(o.pix||o.qr)?`<h3>Pague com Pix</h3>${o.qr?`<img src="${o.qr}" alt="QR Code Pix" style="width:220px;max-width:100%;background:#fff;padding:8px;border-radius:12px;margin:10px auto;display:block">`:''}${o.pix?`<div class="pix">${o.pix}</div><button id="cp" class="btn p" style="margin-top:10px" onclick="copyPix()">COPIAR CÓDIGO PIX</button>`:''}<p class="mut" style="font-size:13px">No app do seu banco, escolha Pix copia e cola e cole o código.</p>`:`<p>O Pix foi gerado, mas o código não apareceu aqui. Fale com a loja para receber o pagamento.</p><p class="mut" style="font-size:12px">Resposta recebida (envie para o suporte):</p><pre class="pix" style="text-align:left;white-space:pre-wrap;font-size:11px">${o.raw.replace(/</g,'&lt;')}</pre>`}
-<a class="btn s" style="text-decoration:none" href="${wa}" target="_blank" rel="noopener">ENVIAR COMPROVANTE NO WHATSAPP</a><button class="btn s" onclick="go('product')">Voltar à loja</button></div>`}
+${(o.pix||o.qr)?`<h3>Pague com Pix</h3>${o.qr?`<img src="${o.qr}" alt="QR Code Pix" style="width:220px;max-width:100%;background:#fff;padding:8px;border-radius:12px;margin:10px auto;display:block">`:''}${o.pix?`<div class="pix pixcode">${o.pix}</div><button id="cp" class="btn p" style="margin-top:10px" onclick="copyPix()">COPIAR CÓDIGO PIX</button>`:''}<p class="mut" style="font-size:13px">No app do seu banco, escolha Pix copia e cola e cole o código.</p>`:`<p>O Pix foi gerado, mas o código não apareceu aqui. Fale com a loja para receber o pagamento.</p>`}
+<button class="btn s" onclick="go('product')">Voltar à loja</button></div>`}
 function render(){$('badge').textContent=cnt();
  if(['checkout','payment'].includes(S.view)&&!S.cart.length)S.view='cart';
  $('app').innerHTML={product,cart,checkout,payment,done}[S.view]();
